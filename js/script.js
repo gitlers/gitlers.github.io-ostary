@@ -1,7 +1,12 @@
 const burger = document.querySelector('.header__burger'),
       asideMenu = document.querySelector('.aside-menu'),
       asideMenuClose = document.querySelector('.aside-menu__close'),
-      overlay = document.querySelector('.overlay');
+      overlay = document.querySelector('.overlay'),
+      BtnMore = document.querySelector('.catalog__more'),
+      modalClose = document.querySelectorAll('.modal__close'),
+      modalConsultation = document.querySelector('[data-consultation="consultation"]'),
+      modalOrder = document.querySelector('[data-order="order"]'),
+      catalogBtn = document.querySelectorAll('.catalog-item__btn');
 
 $('.promo-slider').slick({
     dots: true,
@@ -82,6 +87,35 @@ asideMenuClose.addEventListener('click',()=>{
     asideMenu.classList.toggle('aside-menu--active');
     overlay.style.display = "none";
 });
+
+BtnMore.addEventListener('click',()=>{
+    modalConsultation.style.display = "block";
+    overlay.style.display = "block";
+});
+
+overlay.addEventListener('click',()=>{
+    if(asideMenu.classList.length == 1){
+        modalOrder.style.display = "none";
+        modalConsultation.style.display = "none";
+        overlay.style.display = "none";
+    }
+});
+
+catalogBtn.forEach((item)=>{
+    item.addEventListener('click',()=>{
+        modalOrder.style.display = "block"
+        overlay.style.display = "block";
+    });
+});
+
+modalClose.forEach((item)=>{
+    item.addEventListener('click',()=>{
+        modalOrder.style.display = "none";
+        modalConsultation.style.display = "none";
+        overlay.style.display = "none"; 
+    });
+});
+
 
 window.addEventListener('scroll', ()=>{
     if(window.pageYOffset >= 10){
